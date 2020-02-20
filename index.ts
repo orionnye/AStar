@@ -1,7 +1,7 @@
 import State from './src/state'
 import { Vector } from './src/math'
 import { clearCanvas, drawGrid, numberGrid } from './src/render'
-import Player from './Player'
+import Player from './src/player'
 
 //Updating verification
 console.log("Looking for an honest man")
