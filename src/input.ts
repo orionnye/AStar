@@ -11,11 +11,9 @@ export default class Input {
     }
     
     setKeyTrue(e: KeyboardEvent) {
-        console.log("setting:", this.keys)
         this.keys.set(e.key, true)
     }
     setKeyFalse(e: KeyboardEvent) {
-        console.log("setting:", e.key)
         this.keys.set(e.key, false)
     }
     setMouse(button: number, value: boolean) {
@@ -25,35 +23,17 @@ export default class Input {
         this.cursor = newPoint
     }
     watchKeys() {
-        console.log("starting watch")
-        window.addEventListener("keyup", this.logKey)
-        // window.addEventListener("keydown", this.setKeyTrue)
-        // window.addEventListener("keyup", this.setKeyFalse)
-    }
-    stopWatch() {
-        console.log("stopping watch")
-        window.removeEventListener("keyup", this.logKey)
-        // window.removeEventListener("keydown", (e) => this.setKey(e, true), true)
-        // window.removeEventListener("keyup", (e) => this.setKey(e, false), true)
-        // window.removeEventListener("mousedown", (e) => this.setMouse(e.button, true))
-        // window.removeEventListener("mouseup", (e) => this.setMouse(e.button, false))
-        // window.removeEventListener("mousemove", (e) => this.setCursor(new Vector(e.x, e.y)))
-    }
-    test() {
-        console.log("functions work fine")
-    }
-    logKey(e) {
-        console.log(e.key)
-        if (e.key == "Enter") {
-            console.log("call me")
-            this.stopWatch()
-        }
+        console.log("starting key watch")
+        window.addEventListener("keydown", (e) => this.setKeyTrue(e))
+        window.addEventListener("keyup", (e) => this.setKeyFalse(e))
     }
     watchMouse() {
+        console.log("starting mouse watch")
         window.addEventListener("mousedown", (e) => this.setMouse(e.button, true))
         window.addEventListener("mouseup", (e) => this.setMouse(e.button, false))
     }
     watchCursor() {
+        console.log("starting cursor watch")
         window.addEventListener("mousemove", (e) => this.setCursor(new Vector(e.x, e.y)))
     }
 }
