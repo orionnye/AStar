@@ -1,4 +1,4 @@
-import { Vector } from "./src/math";
+import { Vector } from "./math";
 import Input from "./input";
 
 export default class Player extends Input{

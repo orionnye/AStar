@@ -1,6 +1,6 @@
 import Grid from "./grid"
 import { Vector } from "./math"
-import Player from "../Player"
+import Player from "./player"
 
 export default class State {
     map: Grid

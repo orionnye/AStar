@@ -1,4 +1,4 @@
-import { Vector } from "./src/math"
+import { Vector } from "./math"
 
 export default class Input {
     keys: Map<string, boolean>
