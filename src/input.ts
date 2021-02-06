@@ -11,6 +11,7 @@ export default class Input {
     }
     
     setKeyTrue(e: KeyboardEvent) {
+        console.log("key:", e.key)
         this.keys.set(e.key, true)
     }
     setKeyFalse(e: KeyboardEvent) {

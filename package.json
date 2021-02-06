@@ -6,10 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orionnye/AStar.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orionnye/AStar/issues"
+  },
+  "homepage": "https://github.com/orionnye/AStar#readme",
   "devDependencies": {
-    "typescript": "^3.7.5"
+    "typescript": "^4.1.3"
   }
 }

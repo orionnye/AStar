@@ -14,6 +14,9 @@ export class Vector {
     multiply(that: number) {
         return new Vector(this.x * that, this.y * that)
     }
+    multiplyVec(that: Vector) {
+        return new Vector(this.x * that.x, this.y * that.y)
+    }
     get length() {
         let dist = Math.sqrt(this.x**2 + this.y**2)
         return dist

@@ -1,5 +1,5 @@
 import { Vector } from "./math"
-import Grid from "./grid"
+import { Tile }from "./flood"
 import State from "./state"
 
 //should recieve a world model
@@ -8,45 +8,40 @@ let canvasSize = new Vector(canvas.clientWidth, canvas.clientHeight)
 let c = canvas.getContext('2d')
 
 export function clearCanvas() {
-        // Clear the page
-        c.fillStyle = "beige"
-        c.fillRect(0, 0, canvasSize.x, canvasSize.y)        
+    // Clear the page
+    c.fillStyle = "beige"
+    c.fillRect(0, 0, canvasSize.x, canvasSize.y)        
 }
 
-//Grid Definition
-export function drawGrid(grid: Grid, numbered: boolean = true) {
-    let tileSize = new Vector(grid.size.x / grid.width, grid.size.y / grid.height)
-    grid.content.forEach((row, indexR) => {
-        row.forEach((tile, indexC) => {
-            let currentPos = new Vector(grid.pos.x + indexC * tileSize.x, grid.pos.y + indexR * tileSize.y)
-            strokeRect(currentPos, tileSize)
-            //type definition
-            if (tile.content == 1) {
-                drawRect(currentPos, tileSize, "grey")
-            }
-            //numbers
-            if (numbered) {
-                let textPos = new Vector(grid.pos.x + indexC * tileSize.x - tileSize.x / 3.3, grid.pos.y + indexR * tileSize.y)
-                let currentText = indexC.toString() +", "+ indexR.toString()
-                drawText(textPos, tileSize.x / 3.3, currentText)
-            }
-        })
-    })
-}
-
-//Cell Definition
-export function fillCell(cell: Vector, grid: Grid, color: string = "red") {
-    let tileSize = new Vector(grid.size.x / grid.width, grid.size.y / grid.height)
-    let currentPos = new Vector(grid.pos.x + cell.x * tileSize.x, grid.pos.y + cell.y * tileSize.y)
-    drawRect(currentPos, tileSize, color)
-}
+//Simple
 export function drawRect(pos: Vector, size: Vector, color: string = "red") {
     c.fillStyle = color
     c.fillRect(pos.x, pos.y, size.x, size.y)
 }
 export function strokeRect(pos: Vector, size: Vector, color: string = "black") {
+    c.lineWidth = 1;
     c.strokeStyle = color
     c.strokeRect(pos.x, pos.y, size.x, size.y)
+}
+export function drawLine(start: Vector, finish: Vector, lineWidth: number = 5) {
+    c.lineWidth = lineWidth
+    c.moveTo(start.x, start.y)
+    c.lineTo(finish.x, finish.y)
+    c.stroke()
+}
+export function drawLines(lines: Vector[], scaler: Vector, lineWidth: number = 5) {
+    c.lineWidth = lineWidth
+    c.beginPath()
+    if (lines.length > 1) {
+        let half = scaler.multiply(0.5)
+        let start = lines[0].multiplyVec(scaler).add(half)
+        c.moveTo(start.x, start.y);
+        for (let i = 1; i < lines.length; i++) {
+            let next = lines[i].multiplyVec(scaler).add(half)
+            c.lineTo(next.x, next.y)
+        }
+        c.stroke()
+    }
 }
 
 //Text
