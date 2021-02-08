@@ -2,16 +2,16 @@ import State from './state'
 import { Vector } from './math'
 import { clearCanvas, drawRect, drawLines } from './render'
 import Grid from './grid'
-import {Tile, Flood} from './flood'
+import { Tile, Flood } from './flood'
 
 //Updating verification
 console.log("Looking for an honest man")
 //Page State
-let canvas = <HTMLCanvasElement> document.getElementById("canvas1")
+let canvas = <HTMLCanvasElement>document.getElementById("canvas1")
 let canvasSize = new Vector(canvas.clientWidth, canvas.clientHeight)
 
 let state = new State(new Vector(10, 10), canvasSize)
-let {map, input, cellSize} = state
+let { map, input, cellSize } = state
 input.watchCursor()
 input.watchMouse()
 input.watchKeys()
@@ -66,7 +66,7 @@ function update() {
     //     }
     //     flood = new Flood(start, finish)
     // }
-    
+
     if (input.keys.get("Enter")) {
         //flood adds neighbors for one cell
         if (!flood.complete) {
@@ -97,9 +97,8 @@ function render() {
     map.render(canvasSize)
 
     //draw Flood
-    flood.cells.forEach(cell => {
-        state.fillCell(cell, "rgba(100, 0, 0, 0.4)")
-    })
+    for (let tile of flood.tiles)
+        state.fillCell(tile.pos, "rgba(100, 0, 0, 0.4)")
 
     //draw path start
     let startPos = flood.start.multiplyVec(cellSize)
