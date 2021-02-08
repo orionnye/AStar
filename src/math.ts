@@ -18,7 +18,10 @@ export class Vector {
         return new Vector(this.x * that.x, this.y * that.y)
     }
     get length() {
-        let dist = Math.sqrt(this.x**2 + this.y**2)
+        let dist = Math.sqrt(this.x ** 2 + this.y ** 2)
         return dist
+    }
+    keyString() {
+        return this.x + "," + this.y
     }
 }
